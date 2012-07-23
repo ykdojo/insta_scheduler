@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS" />
+  <title></title>
+  <!--  <link rel="stylesheet" type="text/css" href="./style.css" /> -->
+  <script type="text/javascript" src="./jquery-1.7.2.js"></script>
+  <style type="text/css">
+    div.day {
+      margin: 1px;
+      padding: 20px;
+      float: left;
+      background-color: blue;
+    }
+
+    .group:before, .group:after {
+      content: "";
+      display: table;
+    }
+
+    .group:after {
+      clear: both;
+    }
+
+    .group {
+      zoom: 1; /* IE6&7 */
+    }
+
+  </style>
+  <script type="text/javascript">
+
+    $(document).ready(function(){
+    })
+
+    jQuery(function($) {
+      
+      // when mouse is pressed down on a day
+      function mousedownAction(e) {
+        e.preventDefault();
+
+        // mark days as "ready".
+        $("div.day").addClass("ready");
+        
+
+        // get the row number and the column number
+        //   by cycling through all the classes
+        row_col = [];
+
+        var classes = $(this).attr("class").split(' ');
+        $.each(classes, function(index, class_name){
+            // then, push the parsed int unless it's NaN.
+            var num = parseInt(class_name)
+
+            if( !isNaN(num) ){
+              row_col.push(num);
+            }
+        })
+        
+      }
+
+      function mouseoverAction() {
+
+      }
+
+
+      $("div.day").mousedown(mousedownAction);
+      $("div.day.ready").mouseover(mouseoverAction);
+
+      
+    });
+
+  </script>
+</head>
+<body>
+    <div class="group">
+      <div class="day 1_row 1_col">1_1</div>
+      <div class="day 1_row 2_col">2_2</div>
+    </div>
+
+    <div class="group">
+      <div class="day 2_row 1_col">3</div>
+      <div class="day 2_row 2_col">4</div>
+    </div>
+
+</body>
+</html>
+
